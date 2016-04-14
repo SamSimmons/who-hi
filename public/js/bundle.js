@@ -1572,20 +1572,14 @@ module.exports = {
   answer: answer
 }
 
-<<<<<<< HEAD
-},{"./dropdown":1,"./panel":4,"./timer":6}],3:[function(require,module,exports){
-var game = require('./game.js')
-var render = require('./render.js')
- //starts the game
-render.renderLanding()
-render.renderScores()
-
-//when button is clicked call the following function
-=======
-},{"./dropdown":7,"./panel":10,"./timer":12}],9:[function(require,module,exports){
+},{"./dropdown":7,"./panel":10,"./timer":13}],9:[function(require,module,exports){
 var game = require('./game.js')
 var server = require('./server.js')
->>>>>>> master
+var render = require('./render.js')
+
+
+render.renderLanding()
+render.renderScores()
 
 var main = document.querySelector('.gameContainer')
 
@@ -1630,12 +1624,8 @@ var newArray = server.getCohort(function(err, res){
         //hide the main panel
         //show the finish and score
         //post the score to the server
-<<<<<<< HEAD
-},{"./game.js":2,"./render.js":5}],4:[function(require,module,exports){
-=======
 
-},{"./game.js":8,"./server.js":11}],10:[function(require,module,exports){
->>>>>>> master
+},{"./game.js":8,"./render.js":11,"./server.js":12}],10:[function(require,module,exports){
 var currentPanel = 0
 
 function render(imageUrl){
@@ -1660,8 +1650,7 @@ module.exports = {
   reset: reset
 }
 
-<<<<<<< HEAD
-},{}],5:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = {
 	renderLanding: function () {
 		var overlay = document.createElement('div')
@@ -1709,9 +1698,7 @@ module.exports = {
 	}
 }
 
-},{}],6:[function(require,module,exports){
-=======
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var request = require('superagent')
 
 function getCohort(callback){
@@ -1759,8 +1746,7 @@ module.exports = {
   getScores: getScores
 }
 
-},{"superagent":1}],12:[function(require,module,exports){
->>>>>>> master
+},{"superagent":1}],13:[function(require,module,exports){
 var clock = $('.timer').FlipClock(30, {
   autoStart: false,
   countdown: true
