@@ -24,14 +24,14 @@ h1 {
 	margin: 0 auto;
 	height: 40vw;
 	width: 40vw;
-	background-color: $main + 50;
 	display: flex;
+	background: url('http://i.imgur.com/Vf7gb.jpg') no-repeat center;
+	background-size: cover;
 }
 
 .panel-container {
 	width: 40vw;
 	height: 40vw;
-	background-color: skyblue;
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -42,4 +42,8 @@ h1 {
 	height: (40vw / 3);
 	opacity: .5;
 	border: 1px solid tomato;
+}
+
+.hidden {
+	opacity: 0;
 }

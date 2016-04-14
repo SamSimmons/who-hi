@@ -1,12 +1,11 @@
 var express = require('express');
+var Knex = require('knex');
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var db = require('./db/db');
 
 var app = express();
 
@@ -22,8 +21,34 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+
+app.get('/', function(req, res) {
+  res.render('index')
+});
+
+app.get('/scores', function(req, res) {
+  db.getTops('highscores')
+    .then(function(scores) {
+      res.json(scores)
+    })
+});
+
+
+app.get('/start', function(req, res) {
+  db.getAll('cohort')
+    .then(function(cohort) {
+      res.json(cohort)
+    })
+});
+
+app.post('/finish', function(req, res) {
+  db.add('highscores',req.body).then(function(){
+    db.getTops('highscores')
+      .then(function(scores) {
+        res.json(scores)
+    })
+  })
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
