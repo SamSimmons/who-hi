@@ -3,7 +3,7 @@ $contrast: #fd633f;
 $light: #e0dddc;
 $dark: #545454;
 
-body {
+* {
 	box-sizing: border-box;
 	font-size: 100%;
 }
@@ -41,5 +41,5 @@ h1 {
 	width: (40vw / 3);
 	height: (40vw / 3);
 	opacity: .5;
-	// border: 1px solid tomato;
+	border: 1px solid tomato;
 }
