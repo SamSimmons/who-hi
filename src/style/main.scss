@@ -47,3 +47,10 @@ h1 {
 .hidden {
 	opacity: 0;
 }
+
+.overlay {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	background: tomato;
+}

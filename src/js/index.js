@@ -1,4 +1,5 @@
 var game = require('./game.js')
+var render = require('./render.js')
  //starts the game
 
 

@@ -83,8 +83,9 @@ module.exports = {
   answer: answer
 }
 
-},{"./dropdown":1,"./panel":4,"./timer":5}],3:[function(require,module,exports){
+},{"./dropdown":1,"./panel":4,"./timer":6}],3:[function(require,module,exports){
 var game = require('./game.js')
+var render = require('./render.js')
  //starts the game
 
 
@@ -132,8 +133,7 @@ imageArray.map(function(imageObject){
         //hide the main panel
         //show the finish and score
         //post the score to the server
-
-},{"./game.js":2}],4:[function(require,module,exports){
+},{"./game.js":2,"./render.js":5}],4:[function(require,module,exports){
 var currentPanel = 0
 
 function render(imageUrl){
@@ -158,6 +158,28 @@ module.exports = {
 }
 
 },{}],5:[function(require,module,exports){
+var landing = function () {
+	var overlay = document.createElement('div')
+	overlay.className = 'overlay'
+
+	var usernameInput = document.createElement('input')
+	usernameInput.className = "username-input"
+	usernameInput.type = "text"
+	usernameInput.placeholder = "username" 
+
+
+	var startButton = document.createElement('button')
+	startButton.innerHTML = "START"
+	startButton.className = "start btn"
+
+	overlay.appendChild(usernameInput)
+	overlay.appendChild(startButton)
+
+	document.body.appendChild(overlay)	
+}
+
+landing()
+},{}],6:[function(require,module,exports){
 var clock = $('.timer').FlipClock(30, {
   autoStart: false,
   countdown: true
