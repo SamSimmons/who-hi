@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var db = require('db/db');
+var knex = require('knex')
+var db = require('./db/db');
 
 var app = express();
 
@@ -26,7 +27,8 @@ app.get('/', function(req, res, next) {
 });
 
 app.get('/game', function(req, res, next) {
-
+  var result = knex.select().table('cohort');
+  console.log(result);
 });
 
 app.post('/score', function(req, res, next) {
