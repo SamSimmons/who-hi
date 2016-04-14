@@ -1,5 +1,7 @@
 var redtape = require('redtape')
-var knex = require('knex')
+var config = require('../knexfile').development;
+var knex = require('knex')(config)
+
 
 
 var db = require('../db/db')
