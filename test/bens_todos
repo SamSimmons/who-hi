@@ -1,0 +1,22 @@
+GET /     (home, index.html)
+
+limit highscores to top 10
+check every highscore row (because only ever x10)
+
+
+
+GET /start     (when game begins)
+
+get x18 cohorts from the database
+- limit cohort to x18 rows (only 18 students)
+- check every cohort row (because only ever x18)
+
+
+
+POST /finish      (when player runs out of time and his score is sent to server)
+
+expect one {name: elliot, score: 2000} from Client
+
+send back highscores
+- limit highscores to x10 rows (top 10)
+- check every highscore row (because only ever x10)
