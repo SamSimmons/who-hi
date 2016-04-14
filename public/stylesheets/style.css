@@ -1,8 +1,2 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+#main{width:100vw;height:100vh;background-color:#48497b;color:#fd633f}
 
-a {
-  color: #00B7FF;
-}
