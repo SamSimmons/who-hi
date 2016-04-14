@@ -4,6 +4,11 @@ var dropdown = require('./dropdown')
 var timerPanel = 0
 var score = 0
 
+//this module controls game logic
+//starts the game using a timer
+//
+//check
+
 //user press start
   //show the first image and div with the timer and the start button
   //user press start
@@ -20,6 +25,12 @@ var score = 0
       //post the score to the server
 
 function start(imageArray) {
+
+  //start the timer
+  //render/reset the panel
+  //populate the drop down box
+  //set the score to 0
+
   timer.start(timeTick)
 
 

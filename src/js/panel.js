@@ -6,8 +6,9 @@ function render(imageUrl){
 }
 
 function remove(){
-  console.log('removing panel')
-  document.querySelector('.panel').style.visibility = 'hidden'
+  console.log('removing panel', $('.panel:not(:hidden)').length)
+
+  $('.panel').filter(':not(:hidden)').first().css('visibility','hidden')
 
 }
 

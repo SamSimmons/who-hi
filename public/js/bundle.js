@@ -1488,16 +1488,17 @@ var correctAnswer = 0
 
 //takes in the whole cohort array, and an int on the correct index of the answer
 //populates the dropdown box with 4 random answers
+//dropdown box is currently #dropbox element
 function populate(answersArray, correct){
   console.log(answersArray)
   correctAnswer = correct
-  document.querySelector('#dropbox').innerHTML = ""
-  answersArray.forEach(function(answer, i){
-    var option = document.createElement('option')
-    option.innerHTML = answer
-    option.value = i
-    document.querySelector('#dropbox').appendChild(option)
-  })
+  // document.querySelector('#dropbox').innerHTML = ""
+  // answersArray.forEach(function(answer, i){
+  //   var option = document.createElement('option')
+  //   option.innerHTML = answer
+  //   option.value = i
+  //   document.querySelector('#dropbox').appendChild(option)
+  // })
 
 
 }
@@ -1520,6 +1521,11 @@ var dropdown = require('./dropdown')
 var timerPanel = 0
 var score = 0
 
+//this module controls game logic
+//starts the game using a timer
+//
+//check
+
 //user press start
   //show the first image and div with the timer and the start button
   //user press start
@@ -1536,6 +1542,12 @@ var score = 0
       //post the score to the server
 
 function start(imageArray) {
+
+  //start the timer
+  //render/reset the panel
+  //populate the drop down box
+  //set the score to 0
+
   timer.start(timeTick)
 
 
@@ -1634,8 +1646,9 @@ function render(imageUrl){
 }
 
 function remove(){
-  console.log('removing panel')
-  document.querySelector('.panel').style.visibility = 'hidden'
+  console.log('removing panel', $('.panel:not(:hidden)').length)
+
+  $('.panel').filter(':not(:hidden)').first().css('visibility','hidden')
 
 }
 
@@ -1749,7 +1762,8 @@ module.exports = {
 },{"superagent":1}],13:[function(require,module,exports){
 var clock = $('.timer').FlipClock(30, {
   autoStart: false,
-  countdown: true
+  countdown: true,
+  clockFace: 'MinuteCounter'
 });
 
 function start(callback) {
