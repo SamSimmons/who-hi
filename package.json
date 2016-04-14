@@ -8,7 +8,7 @@
     "testunit": "node test/unit_test_*.js | tap-spec",
     "testint": "node test/inter*.js | tap-spec",
     "build": "watchify ./src/js/index.js -o ./public/js/bundle.js",
-    "css": "cat main.scss | node-sass --output-style compressed > ../../public/stylesheets/style.css"
+    "css": "cat ./src/style/main.scss | node-sass --output-style compressed > ./public/stylesheets/style.css"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
