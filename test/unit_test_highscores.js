@@ -66,7 +66,7 @@ test('setup', function (t) {
 
 // db.getAll
 test('gets all the rows from table = ' + testTableName + ' (in this case x1 entry)', function (t) {
-  db.getAll(testTableName, function (err, resp) {
+  db.getAll(testTableName).then(function (err, resp) {
     Object.keys(testEntry).forEach(function (key) {
       t.equal(testEntry[key], resp[0][key], key + ': ' + testEntry[key] + ' is equal')
     })
@@ -82,7 +82,7 @@ test('gets all the rows from table = ' + testTableName + ' (in this case x1 entr
 
 
 test('gets a particular player & their highscore', function (t) {
-  db.findOne(testTableName, testIdObj2, function (err, resp) {
+  db.findOne(testTableName, testIdObj2).then(function (err, resp) {
     t.equal(resp.name, testEntry2.name, 'it got the players name')
     t.equal(resp.score, testEntry2.score, 'it got the player score')
     t.end()
@@ -91,7 +91,7 @@ test('gets a particular player & their highscore', function (t) {
 
 
 test('it adds ' + testEntry3.name + ' to the ' + testTableName + 'database', function (t) {
-  db.add(testTableName, testEntry3, function (err, resp) {
+  db.add(testTableName, testEntry3).then(function (err, resp) {
     db.findOne(testTableName, testIdObj3, function (err, resp) {
       Object.keys(testEntry3).forEach(function (key) {
         t.equal(testEntry3[key], resp[key], key + ': ' + testEntry3[key] + ' is equal')
