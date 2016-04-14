@@ -2,8 +2,6 @@ var redtape = require('redtape')
 var config = require('../knexfile').test
 var knex = require('knex')(config)
 
-
-
 var db = require('../db/db')
 
 
