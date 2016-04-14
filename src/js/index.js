@@ -1,24 +1,22 @@
 var game = require('./game.js')
- //starts the game
-
-
-//when button is clicked call the following function
-
-
-
-console.log("hello there")
+var server = require('./server.js')
 
 var main = document.querySelector('.gameContainer')
+
 var imageArray = [{ id: 1, name: 'harry', image: 'http://i.imgur.com/sVLVL5z.jpg'}, { id: 2, name: 'polly', image: 'http://i.imgur.com/skyvLsc.png' }, { id: 3, name: 'roger', image: 'http://i.imgur.com/49gsA5P.jpg' }]
 
-game.start(imageArray)
-
-imageArray.map(function(imageObject){
-  var imageDiv = document.createElement('div')
-  imageDiv.id = imageObject.name
-  imageDiv.style.backgroundImage = 'url(' + imageObject.image + ')'
-  main.appendChild(imageDiv)
+var newArray = server.getCohort(function(err, res){
+  game.start(res)
 })
+
+
+
+// imageArray.map(function(imageObject){
+//   var imageDiv = document.createElement('div')
+//   imageDiv.id = imageObject.name
+//   imageDiv.style.backgroundImage = 'url(' + imageObject.image + ')'
+//   main.appendChild(imageDiv)
+// })
 
 //load the landing page
   //render username box and start button
