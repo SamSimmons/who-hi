@@ -1,12 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
   #main
+    h1= title
     .timer
     .gameContainer
+      .leaderboard
+      .panel-container
+        -for(var i = 0; i < 9; i++)
+          .panel
     .inputContainer
   script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js")
-  script(type="text/javascript" src="js/flipclock.min.js")
+  //- script(type="text/javascript" src="js/flipclock.min.js")
   script(type="text/javascript" src="js/bundle.js")
