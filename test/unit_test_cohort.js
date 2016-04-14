@@ -93,8 +93,9 @@ test('gets a particular cohort members', function (t) {
 
 
 test('it adds ' + testEntry3.name + ' to the ' + testTableName + 'database', function (t) {
-  db.add(testTableName, testEntry3).then(function (resp) {
-    db.findOne(testTableName, testIdObj3, function (resp) {
+  db.add(testTableName, testEntry3).then(function (response) {
+    db.findOne(testTableName, testIdObj3).then(function (resp) {
+      console.log(resp)
       Object.keys(testEntry3).forEach(function (key) {
         t.equal(testEntry3[key], resp[key], key + ': ' + testEntry3[key] + ' is equal')
       })

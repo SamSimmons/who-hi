@@ -2,11 +2,13 @@
 exports.seed = function(knex, Promise) {
   return Promise.join(
     // Deletes ALL existing entries
-    knex('scores').del(), 
+    knex('highscores').del(), 
 
     // Inserts seed entries
-    knex('scores').insert({playerName: 'fluffy', score: 2}),
-    knex('scores').insert({playerName: 'meow', score: 21}),
-    knex('scores').insert({playerName: 'dkfjd', score: 12})
+    knex('highscores').insert({name: 'fluffy', score: 2}),
+    knex('highscores').insert({name: 'meow', score: 21}),
+    knex('highscores').insert({name: 'dkfjd', score: 12}),
+    knex('highscores').insert({name: 'dkfjd', score: 20}),
+    knex('highscores').insert({name: 'gfhh', score: 1})
   );
 };

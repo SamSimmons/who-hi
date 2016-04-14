@@ -1,7 +1,7 @@
 var express = require('express');
 var Knex = require('knex');
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', function(req, res) {
-  db.getAll('scores')
+  db.getTops('highscores')
     .then(function(scores) {
       res.json(scores)
     })
@@ -36,9 +36,12 @@ app.get('/start', function(req, res) {
     })
 });
 
-// app.post('/finish', function(req, res) {
+app.post('/finish', function(req, res) {
+  db.add('highscores',req.body).then(function(){
+    res.redirect('/');
+  })
 
-// });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
