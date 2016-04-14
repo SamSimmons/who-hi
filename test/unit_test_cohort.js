@@ -1,14 +1,11 @@
 var redtape = require('redtape')
-var config = require('../knexfile').development;
+var config = require('../knexfile').test
 var knex = require('knex')(config)
 
-<<<<<<< HEAD
-var db = require('../db')(knex)
-=======
 
 
 var db = require('../db/db')
->>>>>>> 081a4cc91e24b94cdb00ca30046cef39b99c5e19
+
 
 // Setup: we need an initial empty tabel called cohort
 // with the columns; id, name (string), image (string which is a url)
@@ -19,21 +16,21 @@ var testIdObj2 = { id: 2 }
 var testIdObj3 = { id: 3 }
 
 var testEntry = {
-  id: 1,
+  //id: 1,
   name: "Ben Scully",
   image: "http://i179.photobucket.com/albums/w298/Brakjones/cat-watermelon-helmet-img129d.jpg"
 }
 
 var testEntry2 = {
-  id: 2,
+  //id: 2,
   name: "Tony Luisi",
   image: "http://images.buycostumes.com/mgen/merchandiser/60697.jpg"
 }
 
 var testEntry3 = {
-  id: 3,
+  //id: 3,
   name: "Sam Simmons",
-  score: "http://www.ufcbetting.com/wp-content/uploads/2011/07/dan-henderson-275x395.jpg"
+  image: "http://www.ufcbetting.com/wp-content/uploads/2011/07/dan-henderson-275x395.jpg"
 }
 
 
@@ -70,6 +67,7 @@ test('setup', function (t) {
 // db.getAll
 test('gets all the rows from table = ' + testTableName + ' (in this case x1 entry)', function (t) {
   db.getAll(testTableName).then(function (resp) {
+    console.log('hello')
     Object.keys(testEntry).forEach(function (key) {
       t.equal(testEntry[key], resp[0][key], key + ': ' + testEntry[key] + ' is equal')
     })
