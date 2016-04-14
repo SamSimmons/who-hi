@@ -12,7 +12,7 @@ function isCorrect(guess){
 }
 
 
-export.modules = {
+module.exports = {
   populate: populate,
   isCorrect: isCorrect
 }
