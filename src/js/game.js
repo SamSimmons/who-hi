@@ -3,6 +3,8 @@ var panel = require('./panel')
 var dropdown = require('./dropdown')
 var timerPanel = 0
 var score = 0
+var cohortArray = []
+var answersLeftArray = []
 
 //this module controls game logic
 //starts the game using a timer
@@ -25,29 +27,41 @@ var score = 0
       //post the score to the server
 
 function start(imageArray) {
+  cohortArray = imageArray
+  answersLeftArray = cohortArray.map(function(element){ return element })
 
   //start the timer
   //render/reset the panel
   //populate the drop down box
   //set the score to 0
 
+  var currentAnswer = chooseAnswer(answersLeftArray)
+
   timer.start(timeTick)
-
-
   panel.render(imageArray[1].image)
-  dropdown.populate(imageArray, 1)
+  // dropdown.populate(imageArray, 1)
+}
+
+function chooseAnswer(allCohort){
+  var answer = answersLeftArray[0]
+  answersLeftArray.shift()
+  return answer
+}
+
+function chooseOptions(cohortArray, answer){
+  //returns an array that doesn't include answer
 }
 
 function answer(event){
   //check if answer is right or wrong
   //get the text from the dropbox
 
-  if (dropdown.isCorrect(event)){
-    score++
-    panel.render(imageArray[2].image)
-
-
-  }
+  // if (dropdown.isCorrect(event)){
+  //   score++
+  //   panel.render(imageArray[2].image)
+  //
+  //
+  // }
 
 }
 
