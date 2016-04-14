@@ -51,7 +51,9 @@ score: 210
 }
 ]
 
-var landing = function () {
+//replace above with ajax call
+
+var renderLanding = function () {
 	var overlay = document.createElement('div')
 	overlay.className = 'overlay'
 
@@ -71,8 +73,9 @@ var landing = function () {
 	document.body.appendChild(overlay)	
 }
 
-var addHighScore = function () {
+var renderScores = function () {
 	var hiScoreContainer = document.createElement('div')
+	hiScoreContainer.className = "high-score-container"
 
 	hiScore.forEach((score, i) => {
 		var scoreElt = document.createElement('div')

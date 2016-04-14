@@ -233,6 +233,7 @@ var landing = function () {
 
 var addHighScore = function () {
 	var hiScoreContainer = document.createElement('div')
+	hiScoreContainer.className = "high-score-container"
 
 	hiScore.forEach((score, i) => {
 		var scoreElt = document.createElement('div')
