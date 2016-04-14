@@ -2,9 +2,13 @@ var redtape = require('redtape')
 var config = require('../knexfile').development;
 var knex = require('knex')(config)
 
+<<<<<<< HEAD
+var db = require('../db')(knex)
+=======
 
 
 var db = require('../db/db')
+>>>>>>> 081a4cc91e24b94cdb00ca30046cef39b99c5e19
 
 // Setup: we need an initial empty tabel called cohort
 // with the columns; id, name (string), image (string which is a url)
