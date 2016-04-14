@@ -1,11 +1,10 @@
 var game = require('./game.js')
-<<<<<<< HEAD
- //starts the game
-
-//when button is clicked call the following function
-=======
 var server = require('./server.js')
->>>>>>> master
+var render = require('./render.js')
+
+
+render.renderLanding()
+render.renderScores()
 
 var main = document.querySelector('.gameContainer')
 
