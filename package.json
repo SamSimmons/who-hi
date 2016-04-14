@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon",
-    "build": "watchify ./src/js/index.js -o ./public/js/bundle.js"
+    "build": "watchify ./src/js/index.js -o ./public/js/bundle.js",
+    "css": "cat main.scss | node-sass --output-style compressed > ../../public/stylesheets/style.css"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
