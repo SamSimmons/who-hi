@@ -21,13 +21,23 @@ var score = 0
 
 function start(imageArray) {
   timer.start(timeTick)
-  panel.render(imageArray[0])
+
+
+  panel.render(imageArray[1].image)
+  dropdown.populate(imageArray, 1)
 }
 
-function answer(){
+function answer(event){
   //check if answer is right or wrong
   //get the text from the dropbox
-  
+
+  if (dropdown.isCorrect(event)){
+    score++
+    panel.render(imageArray[2].image)
+
+
+  }
+
 }
 
 function timeTick(){
@@ -38,7 +48,6 @@ function timeTick(){
   } else {
     timerPanel++
   }
-
 }
 
 

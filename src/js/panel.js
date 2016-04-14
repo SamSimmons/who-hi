@@ -2,6 +2,7 @@ var currentPanel = 0
 
 function render(imageUrl){
   console.log('rendering image', imageUrl)
+  document.querySelector('.gameContainer').style.backgroundImage = 'url("' + imageUrl + '")'
 }
 
 function remove(){
@@ -12,7 +13,7 @@ function remove(){
 
 function reset(){
   console.log('resetting panel')
-
+  currentPanel = 0
 }
 
 module.exports = {
