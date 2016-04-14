@@ -4,9 +4,8 @@ var knexConfig = require('../knexfile')
 
 var knex = Knex(knexConfig[process.env.NODE_ENV || 'development'])
 
-module.exports = function (knex) {
-  
-  return {
+module.exports =  {
+	
     getAll: function (tableName) {
       return knex.select().table( tableName )
     },
@@ -22,5 +21,4 @@ module.exports = function (knex) {
     update: function (tableName, searchParams, updateInfo) {
       return knex(tableName).where('id',searchParams.id).update(updateInfo)
     }
-  }
 }
