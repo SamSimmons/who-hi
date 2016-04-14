@@ -10,7 +10,6 @@ var db = require('../db/db')
 // Setup: we need an initial empty tabel called highscores
 // with the columns; id, name (string), score (integer)
 
-
 var testTableName = 'highscores'
 var testIdObj = { id: 1 }
 var testIdObj2 = { id: 2 }
