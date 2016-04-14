@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var knex = require('knex')
 var db = require('./db/db');
 
 var app = express();
@@ -22,16 +21,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get('/', function(req, res, next) {
-  res.render('index');
+app.get('/', function(req, res) {
+  db.getAll('scores')
+    .then(function(scores) {
+      console.log(scores)
+      res.render(scores)
+    })
 });
 
-app.get('/game', function(req, res, next) {
+app.get('/game', function(req, res) {
   var result = knex.select().table('cohort');
   console.log(result);
 });
 
-app.post('/score', function(req, res, next) {
+app.post('/score', function(req, res) {
 
 });
 

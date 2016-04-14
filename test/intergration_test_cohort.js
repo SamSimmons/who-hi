@@ -32,7 +32,7 @@ var testEntry2 = {
 var testEntry3 = {
   id: 3,
   name: "Sam Simmons",
-  score: "http://www.ufcbetting.com/wp-content/uploads/2011/07/dan-henderson-275x395.jpg"
+  image: "http://www.ufcbetting.com/wp-content/uploads/2011/07/dan-henderson-275x395.jpg"
 }
 
 var test = redtape({

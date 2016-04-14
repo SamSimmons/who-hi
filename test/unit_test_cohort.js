@@ -4,7 +4,7 @@ var dbConfig = require('../../db-config')
 var knex = dbConfig.knex
 var config = dbConfig.config
 
-var db = require('../../db')(knex)
+var db = require('../db')(knex)
 
 // Setup: we need an initial empty tabel called cohort
 // with the columns; id, name (string), image (string which is a url)
