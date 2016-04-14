@@ -4,6 +4,7 @@ var correctAnswer = 0
 //takes in an array of strings with the possible answers, and an int on the correct index of the answer
 //populates the dropdown box with the answers
 function populate(answersArray, correct){
+  console.log(answersArray)
   correctAnswer = correct
   document.querySelector('#dropbox').innerHTML = ""
   answersArray.forEach(function(answer, i){
@@ -12,6 +13,7 @@ function populate(answersArray, correct){
     option.value = i
     document.querySelector('#dropbox').appendChild(option)
   })
+
 
 }
 

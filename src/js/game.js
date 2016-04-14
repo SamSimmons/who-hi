@@ -22,12 +22,16 @@ var score = 0
 function start(imageArray) {
   timer.start(timeTick)
   panel.render(imageArray[0])
+  var solutions = imageArray.map(function(image){
+    return image.name
+  })
+  dropdown.populate(solutions, 0)
 }
 
 function answer(){
   //check if answer is right or wrong
   //get the text from the dropbox
-  
+
 }
 
 function timeTick(){
