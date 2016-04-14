@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "dev": "nodemon",
     "build": "watchify ./src/js/index.js -o ./public/js/bundle.js",
     "css": "cat main.scss | node-sass --output-style compressed > ../../public/stylesheets/style.css"
@@ -12,12 +12,18 @@
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
-    "express": "~4.13.1",
+    "express": "^4.13.4",
     "jade": "~1.11.0",
+    "knex": "^0.10.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "pg": "^4.5.3",
+    "serve-favicon": "~2.3.0",
+    "sqlite3": "^3.1.3"
   },
   "devDependencies": {
+    "nodemon": "^1.9.1",
+    "redtape": "^1.0.0",
+    "serve-favicon": "~2.3.0",
     "watchify": "^3.7.0"
   }
 }
