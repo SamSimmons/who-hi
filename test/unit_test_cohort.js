@@ -1,10 +1,14 @@
 var redtape = require('redtape')
-var App = require('../../server')
-var dbConfig = require('../../db-config')
-var knex = dbConfig.knex
-var config = dbConfig.config
+var config = require('../knexfile').development;
+var knex = require('knex')(config)
 
+<<<<<<< HEAD
 var db = require('../db')(knex)
+=======
+
+
+var db = require('../db/db')
+>>>>>>> 081a4cc91e24b94cdb00ca30046cef39b99c5e19
 
 // Setup: we need an initial empty tabel called cohort
 // with the columns; id, name (string), image (string which is a url)
@@ -65,7 +69,7 @@ test('setup', function (t) {
 
 // db.getAll
 test('gets all the rows from table = ' + testTableName + ' (in this case x1 entry)', function (t) {
-  db.getAll(testTableName, function (err, resp) {
+  db.getAll(testTableName).then(function (err, resp) {
     Object.keys(testEntry).forEach(function (key) {
       t.equal(testEntry[key], resp[0][key], key + ': ' + testEntry[key] + ' is equal')
     })
@@ -81,7 +85,7 @@ test('gets all the rows from table = ' + testTableName + ' (in this case x1 entr
 
 
 test('gets a particular cohort members', function (t) {
-  db.findOne(testTableName, testIdObj2, function (err, resp) {
+  db.findOne(testTableName, testIdObj2).then(function (err, resp) {
     t.equal(resp.name, testEntry2.name, 'it got the cohort members name')
     t.equal(resp.image, testEntry2.image, 'it got the cohort members image url')
     t.true(String(resp.image).includes("http://"))
@@ -91,7 +95,7 @@ test('gets a particular cohort members', function (t) {
 
 
 test('it adds ' + testEntry3.name + ' to the ' + testTableName + 'database', function (t) {
-  db.add(testTableName, testEntry3, function (err, resp) {
+  db.add(testTableName, testEntry3).then(function (err, resp) {
     db.findOne(testTableName, testIdObj3, function (err, resp) {
       Object.keys(testEntry3).forEach(function (key) {
         t.equal(testEntry3[key], resp[key], key + ': ' + testEntry3[key] + ' is equal')
