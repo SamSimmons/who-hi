@@ -8,31 +8,31 @@ var config = dbConfig.config
 var db = require('../../db')(knex)
 var app = App(db)
 
-// Setup: we need an initial empty tabel called cohort
-// with the columns; id, name (string), image (string which is a url)
+// Setup: we need an initial empty tabel called highscores
+// with the columns; id (integer), name (string), score (number)
 
-var testTableName = 'cohort'
-var testSingleRow = 'cohor member'
+var testTableName = 'highscores'
+var testSingleRow = 'player'
 var testIdObj = { id: 1 }
 var testIdObj2 = { id: 2 }
 var testIdObj3 = { id: 3 }
 
 var testEntry = {
   id: 1,
-  name: "Ben Scully",
-  image: "http://i179.photobucket.com/albums/w298/Brakjones/cat-watermelon-helmet-img129d.jpg"
+  name: "pickachu",
+  score: 2000
 }
 
 var testEntry2 = {
   id: 2,
-  name: "Tony Luisi",
-  image: "http://images.buycostumes.com/mgen/merchandiser/60697.jpg"
+  name: "bono",
+  score: 3000
 }
 
 var testEntry3 = {
   id: 3,
-  name: "Sam Simmons",
-  image: "http://www.ufcbetting.com/wp-content/uploads/2011/07/dan-henderson-275x395.jpg"
+  name: "conor mcgregor",
+  score: 1000
 }
 
 var test = redtape({
