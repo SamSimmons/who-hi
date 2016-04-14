@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
 	  knex.schema.createTableIfNotExists('cohort', function(table) {
 	   table.increments() 
 	   table.string('name')
-	   table.integer('image')
+	   table.string('image')
 	  })
   ]) 
 };

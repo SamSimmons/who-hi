@@ -5,18 +5,15 @@ var clock = $('.timer').FlipClock(30, {
 
 function start(callback) {
   clock.start(function(){
-    callback()
+    callback(clock.getTime.time)
   })
-  //add the timer
-  //press the button to start the timer
-  //when the button is pressed
-  //show the first image
-  //after a number of seconds remove the panel
-  //if answer is guessed, hide the image and show the next image
+}
 
-
+function getTime(){
+  return clock.getTime.time
 }
 
 module.exports = {
-  start: start
+  start: start,
+  getTime: getTime
 }
