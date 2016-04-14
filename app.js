@@ -38,9 +38,11 @@ app.get('/start', function(req, res) {
 
 app.post('/finish', function(req, res) {
   db.add('highscores',req.body).then(function(){
-    res.redirect('/');
+    db.getTops('highscores')
+      .then(function(scores) {
+        res.json(scores)
+    })
   })
-
 });
 
 // catch 404 and forward to error handler

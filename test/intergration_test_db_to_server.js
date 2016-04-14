@@ -1,13 +1,13 @@
 var redtape = require('redtape')
 var request = require('supertest')
 
-var App = require('../../server')
+var app = require('../app')
 
 var config = require('../knexfile').test
 var knex = require('knex')(config)
 
 var db = require('../db/db')
-var app = App(db)
+
 
 // Setup: we need an initial empty tabel called highscores
 // with the columns; id (integer), name (string), score (number)
@@ -20,12 +20,12 @@ var cohortSingle = 'cohort member'
 
 var highscoresEntry = {
   name: "pickachu",
-  score: 2000
+  score: 3000
 }
 
 var highscoresEntry2 = {
   name: "bono",
-  score: 3000
+  score: 2000
 }
 
 var highscoresEntry3 = {
@@ -100,7 +100,7 @@ test('It gets Top 10 from ' + highscores + ' DB & sends as JSON to Browser', fun
         t.equal(highscoresEntry2[key], res.body[1][key], key + ': ' + highscoresEntry2[key] + ' is equal')
       })
 
-      t.true(resp.length === 2, 'there should only be x2 seed rows in table ' + highscores)
+      t.true(res.body.length === 2, 'there should only be x2 seed rows in table ' + highscores)
 
       // TODO should this 'res' be a JSON object?
       // TODO it would be ok for there to be no scores but lets seed the DB with 'computer' AI scores
@@ -118,13 +118,12 @@ test('It gets all x18 ' + cohortSingle + 's from DB & sends as JSON to Browser',
   request(app)
     .get('/start')
     .expect(200)
-    .end(function (err, res) {
+    .end(function (err,res) {
+     
       t.ok(res.body, 'basic test; at least something is returning :)')
 
-      t.equal(1, res.body.id, "id given same as " + highscoresSingle + ".id returned")
-
-      Object.keys(testEntry).forEach(function (key) {
-        t.equal(testEntry[key], res.body[key], key + ': ' + testEntry[key] + ' is equal')
+      Object.keys(cohortEntry).forEach(function (key) {
+        t.equal(cohortEntry[key], res.body[0][key], key + ': ' + cohortEntry[key] + ' is equal')
       })
 
       // TODO should this 'res' be a JSON object?
@@ -141,10 +140,10 @@ test('It adds ONE ' + highscoresSingle + ' to the ' + highscores + ' DB & sends 
     .post('/finish')
     .send(highscoresEntry3)
     .expect(200)
-    .end(function (err, res) {
+    .end(function (err,res) {
       t.ok(res.body, 'basic test; at least something is returning :)')
-
       Object.keys(highscoresEntry).forEach(function (key) {
+
         t.equal(highscoresEntry[key], res.body[0][key], key + ': ' + highscoresEntry[key] + ' is equal')
       })
 
@@ -153,10 +152,10 @@ test('It adds ONE ' + highscoresSingle + ' to the ' + highscores + ' DB & sends 
       })
 
       knex.select().from(highscores)
-        .then(function (resp) {
-          t.true(resp.length === 3, "there are now x3 " + highscoresSingle + " in the table")
+        .then(function (res) {
+          t.true(res.length === 3, "there are now x3 " + highscoresSingle + " in the table")
 
-          var newlyAdded = resp.filter( function (val) {
+          var newlyAdded = res.filter( function (val) {
             return val.name === highscoresEntry3.name && val.score === highscoresEntry3.score
           })
 
