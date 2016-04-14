@@ -1,8 +1,8 @@
 var timer = require('./timer')
 var panel = require('./panel')
 var dropdown = require('./dropdown')
-
-
+var timerPanel = 0
+var score = 0
 
 //user press start
   //show the first image and div with the timer and the start button
@@ -20,18 +20,29 @@ var dropdown = require('./dropdown')
       //post the score to the server
 
 function start(imageArray) {
-
-  timer.start(endGame)
-
+  timer.start(timeTick)
+  panel.render(imageArray[0])
 }
 
+function answer(){
+  //check if answer is right or wrong
+  //get the text from the dropbox
+  
+}
 
+function timeTick(){
+  console.log('timer panel', timerPanel)
+  if (timerPanel === 3){
+    timerPanel = 0
+    panel.remove()
+  } else {
+    timerPanel++
+  }
 
-function endGame(){
-  console.log('game has ended')
 }
 
 
 module.exports = {
-  start: start
+  start: start,
+  answer: answer
 }

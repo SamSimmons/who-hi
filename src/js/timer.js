@@ -1,11 +1,11 @@
-var clock = $('.timer').FlipClock(10, {
-  autoStart: true,
+var clock = $('.timer').FlipClock(30, {
+  autoStart: false,
   countdown: true
 });
 
 function start(callback) {
   clock.start(function(){
-    console.log(this)
+    callback()
   })
   //add the timer
   //press the button to start the timer

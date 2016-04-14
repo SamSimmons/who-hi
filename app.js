@@ -23,11 +23,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', function(req, res) {
+  res.render('index')
+});
+
+app.get('/scores', function(req, res) {
   db.getTops('highscores')
     .then(function(scores) {
       res.json(scores)
     })
 });
+
 
 app.get('/start', function(req, res) {
   db.getAll('cohort')
