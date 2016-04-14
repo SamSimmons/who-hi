@@ -3,13 +3,15 @@ var game = require('./game.js')
 
 
 //when button is clicked call the following function
-game.start(imageArray)
+
 
 
 console.log("hello there")
 
 var main = document.querySelector('.gameContainer')
 var imageArray = [{ id: 1, name: 'harry', image: 'http://i.imgur.com/sVLVL5z.jpg'}, { id: 2, name: 'polly', image: 'http://i.imgur.com/skyvLsc.png' }, { id: 3, name: 'roger', image: 'http://i.imgur.com/49gsA5P.jpg' }]
+
+game.start(imageArray)
 
 imageArray.map(function(imageObject){
   var imageDiv = document.createElement('div')
