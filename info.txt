@@ -1,0 +1,15 @@
+##colors
+
+background - #48497B or #3962A1
+contrast - #FD633F
+light - #E0DDDC
+dark - ##545454
+
+-game-
+correct - #69DDA0
+incorrect - #E20340
+
+##fonts
+
+main - fira sans
+titles - crimson text
