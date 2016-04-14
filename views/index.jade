@@ -7,8 +7,9 @@ block content
     .gameContainer
       .leaderboard
       .panel-container
-        -for(var i = 0; i < 9; i++)
-          .panel
+        -for(var i = 0; i < 9; i++){
+          div(id='panel-'+i class='panel')
+        -}
     .inputContainer
     select#dropbox
   script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js")
