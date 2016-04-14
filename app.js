@@ -1,4 +1,5 @@
 var express = require('express');
+var Knex = require('knex');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -24,19 +25,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res) {
   db.getAll('scores')
     .then(function(scores) {
-      console.log(scores)
-      res.render(scores)
+      res.json(scores)
     })
 });
 
-app.get('/game', function(req, res) {
-  var result = knex.select().table('cohort');
-  console.log(result);
+app.get('/start', function(req, res) {
+  db.getAll('cohort')
+    .then(function(cohort) {
+      res.json(cohort)
+    })
 });
 
-app.post('/score', function(req, res) {
+// app.post('/finish', function(req, res) {
 
-});
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
