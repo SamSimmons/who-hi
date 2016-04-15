@@ -1,6 +1,7 @@
 var clock = $('.timer').FlipClock(30, {
   autoStart: false,
-  countdown: true
+  countdown: true,
+  clockFace: 'MinuteCounter'
 });
 
 function start(callback) {

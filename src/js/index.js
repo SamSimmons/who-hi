@@ -1,5 +1,10 @@
 var game = require('./game.js')
 var server = require('./server.js')
+var render = require('./render.js')
+
+
+render.renderLanding()
+render.renderScores()
 
 var main = document.querySelector('.gameContainer')
 

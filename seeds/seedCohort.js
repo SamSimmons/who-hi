@@ -5,7 +5,7 @@ exports.seed = function(knex, Promise) {
     knex('cohort').del(), 
 
     // Inserts seed entries
-    knex('cohort').insert({name: 'ollie', image: 'https://www.facebook.com/photo.php?fbd7c2f29f80'}),
+    knex('cohort').insert({name: 'ollie', image: 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/11755102_10207077597637783_135628108007763091_n.jpg?oh=1c43cc933976b98d8de0fcb2d60ae554&oe=57B0F69F&__gda__=1467224360_1bb275890cb5294929dbb9d941d861f9'}),
     knex('cohort').insert({name: 'vicken', image: 'https://scontent-lax3-1.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/10156118_861187617242618_7083955535572245849_n.jpg?oh=249c4c683f5dc4329f7712b2a50d1761&oe=57B838C5'}),
     knex('cohort').insert({name: 'scully', image: 'https://scontent-lax3-1.xx.fbcdn.net/hphotos-xpt1/v/t1.0-9/12195766_10206738472234464_2648511942900713497_n.jpg?oh=2167f08ea3bae690c084f6e1c18394f5&oe=577F1ED3'}),
     knex('cohort').insert({name: 'sam', image: 'https://scontent-lax3-1.xx.fbcdn.net/hphotos-prn2/v/t1.0-9/552861_3380660118706_2068789465_n.jpg?oh=4ff18aeee86630eec1840bb3f5399116&oe=57BF8C1E'}),

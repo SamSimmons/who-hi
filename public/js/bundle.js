@@ -1488,16 +1488,17 @@ var correctAnswer = 0
 
 //takes in the whole cohort array, and an int on the correct index of the answer
 //populates the dropdown box with 4 random answers
+//dropdown box is currently #dropbox element
 function populate(answersArray, correct){
   console.log(answersArray)
   correctAnswer = correct
-  document.querySelector('#dropbox').innerHTML = ""
-  answersArray.forEach(function(answer, i){
-    var option = document.createElement('option')
-    option.innerHTML = answer
-    option.value = i
-    document.querySelector('#dropbox').appendChild(option)
-  })
+  // document.querySelector('#dropbox').innerHTML = ""
+  // answersArray.forEach(function(answer, i){
+  //   var option = document.createElement('option')
+  //   option.innerHTML = answer
+  //   option.value = i
+  //   document.querySelector('#dropbox').appendChild(option)
+  // })
 
 
 }
@@ -1520,6 +1521,11 @@ var dropdown = require('./dropdown')
 var timerPanel = 0
 var score = 0
 
+//this module controls game logic
+//starts the game using a timer
+//
+//check
+
 //user press start
   //show the first image and div with the timer and the start button
   //user press start
@@ -1536,6 +1542,12 @@ var score = 0
       //post the score to the server
 
 function start(imageArray) {
+
+  //start the timer
+  //render/reset the panel
+  //populate the drop down box
+  //set the score to 0
+
   timer.start(timeTick)
 
 
@@ -1572,9 +1584,14 @@ module.exports = {
   answer: answer
 }
 
-},{"./dropdown":7,"./panel":10,"./timer":12}],9:[function(require,module,exports){
+},{"./dropdown":7,"./panel":10,"./timer":13}],9:[function(require,module,exports){
 var game = require('./game.js')
 var server = require('./server.js')
+var render = require('./render.js')
+
+
+render.renderLanding()
+render.renderScores()
 
 var main = document.querySelector('.gameContainer')
 
@@ -1620,7 +1637,7 @@ var newArray = server.getCohort(function(err, res){
         //show the finish and score
         //post the score to the server
 
-},{"./game.js":8,"./server.js":11}],10:[function(require,module,exports){
+},{"./game.js":8,"./render.js":11,"./server.js":12}],10:[function(require,module,exports){
 var currentPanel = 0
 
 function render(imageUrl){
@@ -1629,8 +1646,9 @@ function render(imageUrl){
 }
 
 function remove(){
-  console.log('removing panel')
-  document.querySelector('.panel').style.visibility = 'hidden'
+  console.log('removing panel', $('.panel:not(:hidden)').length)
+
+  $('.panel').filter(':not(:hidden)').first().css('visibility','hidden')
 
 }
 
@@ -1646,6 +1664,54 @@ module.exports = {
 }
 
 },{}],11:[function(require,module,exports){
+module.exports = {
+	renderLanding: function () {
+		var overlay = document.createElement('div')
+		overlay.className = 'overlay'
+
+		var usernameInput = document.createElement('input')
+		usernameInput.className = "username-input"
+		usernameInput.type = "text"
+		usernameInput.placeholder = "username" 
+
+
+		var startButton = document.createElement('button')
+		startButton.innerHTML = "START"
+		startButton.className = "start btn"
+
+		overlay.appendChild(usernameInput)
+		overlay.appendChild(startButton)
+
+		document.body.appendChild(overlay)	
+	},
+	renderScores: function () {
+		$.get('/scores', function (data) {
+			var hiScoreContainer = document.createElement('div')
+			hiScoreContainer.className = "high-score-container"
+
+			data.forEach((score, i) => {
+				var scoreElt = document.createElement('div')
+				scoreElt.className = 'score score-' + i
+
+				var nameElt = document.createElement('p')
+				nameElt.innerHTML = score.name
+				nameElt.className = "score-name"
+
+				var scoreVal = document.createElement('p')
+				scoreVal.innerHTML = score.score
+				scoreVal.className = "score-val"
+
+				scoreElt.appendChild(nameElt)
+				scoreElt.appendChild(scoreVal)
+				hiScoreContainer.appendChild(scoreElt)
+			})
+
+			document.querySelector('.overlay').appendChild(hiScoreContainer)
+		})
+	}
+}
+
+},{}],12:[function(require,module,exports){
 var request = require('superagent')
 
 function getCohort(callback){
@@ -1693,10 +1759,11 @@ module.exports = {
   getScores: getScores
 }
 
-},{"superagent":1}],12:[function(require,module,exports){
+},{"superagent":1}],13:[function(require,module,exports){
 var clock = $('.timer').FlipClock(30, {
   autoStart: false,
-  countdown: true
+  countdown: true,
+  clockFace: 'MinuteCounter'
 });
 
 function start(callback) {
