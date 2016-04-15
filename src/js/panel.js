@@ -6,10 +6,8 @@ function render(imageUrl){
 }
 
 function remove(){
-  console.log('removing panel', $('.panel:not(:hidden)').length)
-
-  $('.panel').filter(':not(:hidden)').first().css('visibility','hidden')
-
+  $('#panel-'+currentPanel).css('visibility','hidden')
+  currentPanel++
 }
 
 function reset(){

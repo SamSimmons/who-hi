@@ -1486,12 +1486,27 @@ module.exports = function(arr, fn, initial){
 var answers = []
 var correctAnswer = 0
 
-//takes in the whole cohort array, and an int on the correct index of the answer
+
+//passes in an array of objects and returns a select object
+//takes in 4 cohort array, and an int on the correct index of the answer
 //populates the dropdown box with 4 random answers
 //dropdown box is currently #dropbox element
-function populate(answersArray, correct){
-  console.log(answersArray)
-  correctAnswer = correct
+
+
+
+function populate(answer, otherOptions){
+
+  //builds the dropdown element
+
+  var element = buildElement(answer, otherOptions)
+  var answer = setAnswer(indexOfAnswer)
+
+
+
+
+}
+
+function buildElement(answer, otherOptions){
   // document.querySelector('#dropbox').innerHTML = ""
   // answersArray.forEach(function(answer, i){
   //   var option = document.createElement('option')
@@ -1499,19 +1514,26 @@ function populate(answersArray, correct){
   //   option.value = i
   //   document.querySelector('#dropbox').appendChild(option)
   // })
-
-
 }
+
+
+
+function setAnswer(indexOfAnswer) {
+  correctAnswer = correct
+}
+
 
 //gets the currently selected dropdown item selected and reutrns a boolean if the guess is correct
-function isCorrect(event){
+function insertDom(element){
 
 }
 
+//build array for dropbox (takes in an answer and five times random)
 
 module.exports = {
   populate: populate,
-  isCorrect: isCorrect
+  setAnswer: setAnswer,
+  insertDom: insertDom
 }
 
 },{}],8:[function(require,module,exports){
@@ -1520,6 +1542,8 @@ var panel = require('./panel')
 var dropdown = require('./dropdown')
 var timerPanel = 0
 var score = 0
+var cohortArray = []
+var answersLeftArray = []
 
 //this module controls game logic
 //starts the game using a timer
@@ -1542,29 +1566,41 @@ var score = 0
       //post the score to the server
 
 function start(imageArray) {
+  cohortArray = imageArray
+  answersLeftArray = cohortArray.map(function(element){ return element })
 
   //start the timer
   //render/reset the panel
   //populate the drop down box
   //set the score to 0
 
+  var currentAnswer = chooseAnswer(answersLeftArray)
+
   timer.start(timeTick)
-
-
   panel.render(imageArray[1].image)
-  dropdown.populate(imageArray, 1)
+  // dropdown.populate(imageArray, 1)
+}
+
+function chooseAnswer(allCohort){
+  var answer = answersLeftArray[0]
+  answersLeftArray.shift()
+  return answer
+}
+
+function chooseOptions(cohortArray, answer){
+  //returns an array that doesn't include answer
 }
 
 function answer(event){
   //check if answer is right or wrong
   //get the text from the dropbox
 
-  if (dropdown.isCorrect(event)){
-    score++
-    panel.render(imageArray[2].image)
-
-
-  }
+  // if (dropdown.isCorrect(event)){
+  //   score++
+  //   panel.render(imageArray[2].image)
+  //
+  //
+  // }
 
 }
 
@@ -1646,10 +1682,8 @@ function render(imageUrl){
 }
 
 function remove(){
-  console.log('removing panel', $('.panel:not(:hidden)').length)
-
-  $('.panel').filter(':not(:hidden)').first().css('visibility','hidden')
-
+  $('#panel-'+currentPanel).css('visibility','hidden')
+  currentPanel++
 }
 
 function reset(){
