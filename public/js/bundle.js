@@ -1678,8 +1678,11 @@ function remove(){
 }
 
 function reset(){
-  console.log('resetting panel')
   currentPanel = 0
+  for(var i = 0; i < 8; i++){
+    $('#panel-'+i).css('visibility','')
+  }
+
 }
 
 module.exports = {
