@@ -2,7 +2,6 @@ extends layout
 
 block content
   #main
-    h1= title
     .timer
     .gameContainer
       .leaderboard
@@ -12,6 +11,7 @@ block content
         -}
     .inputContainer
     select#dropbox
+    button#submit-btn Submit Answer
   script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js")
   script(type="text/javascript" src="js/flipclock.min.js")
   script(type="text/javascript" src="js/bundle.js")
