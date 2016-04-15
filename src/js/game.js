@@ -5,6 +5,7 @@ var timerPanel = 0
 var score = 0
 var cohortArray = []
 var answersLeftArray = []
+var currentAnswer;
 
 //this module controls game logic
 //starts the game using a timer
@@ -35,7 +36,7 @@ function start(imageArray) {
   //populate the drop down box
   //set the score to 0
 
-  var currentAnswer = chooseAnswer(answersLeftArray)
+  currentAnswer = chooseAnswer(answersLeftArray)
 
   timer.start(timeTick)
   panel.render(imageArray[1].image)
@@ -55,14 +56,12 @@ function chooseOptions(cohortArray, answer){
 function answer(event){
   //check if answer is right or wrong
   //get the text from the dropbox
-
   // if (dropdown.isCorrect(event)){
   //   score++
   //   panel.render(imageArray[2].image)
-  //
-  //
-  // }
-
+  var input = $('#dropBox option:selected').text()
+  if(input === currentAnswer)
+    correct()
 }
 
 function timeTick(){
@@ -74,7 +73,6 @@ function timeTick(){
     timerPanel++
   }
 }
-
 
 module.exports = {
   start: start,
