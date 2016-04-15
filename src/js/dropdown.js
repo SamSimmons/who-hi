@@ -27,10 +27,20 @@ function buildElement(nonAnsers,answer){
 
 
 
+function setAnswer(indexOfAnswer) {
+  correctAnswer = correct
+}
+
+
+//gets the currently selected dropdown item selected and reutrns a boolean if the guess is correct
+function insertDom(element){
+
+}
 
 //build array for dropbox (takes in an answer and five times random)
 
 module.exports = {
   populate: populate,
-  buildElement: buildElement
+  setAnswer: setAnswer,
+  insertDom: insertDom
 }

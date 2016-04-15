@@ -1512,12 +1512,22 @@ function buildElement(nonAnsers,answer){
 
 
 
+function setAnswer(indexOfAnswer) {
+  correctAnswer = correct
+}
+
+
+//gets the currently selected dropdown item selected and reutrns a boolean if the guess is correct
+function insertDom(element){
+
+}
 
 //build array for dropbox (takes in an answer and five times random)
 
 module.exports = {
   populate: populate,
-  buildElement: buildElement
+  setAnswer: setAnswer,
+  insertDom: insertDom
 }
 
 },{}],8:[function(require,module,exports){
@@ -1546,7 +1556,6 @@ function start(imageArray) {
 
   timer.start(timeTick)
   panel.render(currentAnswer.image)
-  // dropdown.populate(imageArray, 1)
 }
 
 function chooseAnswer(arr){
@@ -1564,20 +1573,23 @@ function chooseOptions(cohortArray, answer){
 }
 
 function answer(event){
-  var input = $('#dropBox option:selected').text()
-  if(input === currentAnswer)
+  var input = $('#dropbox').val()
+  console.log(input, currentAnswer.name)
+  if(input === currentAnswer.name)
     correct()
 }
 
 function correct(){
+  console.log(answersLeftArray.length)
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
+  dropdown.populate(otherOptions, currentAnswer)
   panel.render(currentAnswer.image)
+  panel.reset()
   score++
 }
 
 function timeTick(){
-  console.log('timer panel', timerPanel)
   if (timerPanel === 3){
     timerPanel = 0
     panel.remove()
@@ -1607,6 +1619,11 @@ var imageArray = [{ id: 1, name: 'harry', image: 'http://i.imgur.com/sVLVL5z.jpg
 
 var newArray = server.getCohort(function(err, res){
   game.start(res)
+})
+
+document.querySelector('#submit-btn').addEventListener('click', function(e){
+  console.log('submit')
+  game.answer(e)
 })
 
 document.querySelector('.start').addEventListener('click', function (e) {
