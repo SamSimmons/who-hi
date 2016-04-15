@@ -11,9 +11,8 @@ var main = document.querySelector('.gameContainer')
 
 var imageArray = [{ id: 1, name: 'harry', image: 'http://i.imgur.com/sVLVL5z.jpg'}, { id: 2, name: 'polly', image: 'http://i.imgur.com/skyvLsc.png' }, { id: 3, name: 'roger', image: 'http://i.imgur.com/49gsA5P.jpg' }]
 
-document.querySelector('#submit-btn').addEventListener('click', function(e){
-  console.log('submit')
-  game.answer(e)
+$('button').click(function() {
+  game.answer($(this).text())
 })
 
 document.querySelector('.start').addEventListener('click', function (e) {

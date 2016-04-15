@@ -21,7 +21,7 @@ function buildElement(nonAnsers,answer){
     nonAnsers.push(answer);
     nonAnsers = shuffleArray(nonAnsers)
     nonAnsers.forEach(function(option,i){
-      var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
+      var _option= $("<button value='"+option.name+"'>"+option.name+"</button>")
       options.push(_option);
       options = shuffleArray(options)
     })
