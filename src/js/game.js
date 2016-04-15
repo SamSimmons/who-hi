@@ -6,8 +6,10 @@ var score = 0
 var cohortArray = []
 var answersLeftArray = []
 var currentAnswer;
+var playerName
 
-function start(imageArray) {
+function start(imageArray, name) {
+  playerName = name
   cohortArray = imageArray
   answersLeftArray = cohortArray.map(function(element){ return element })
 
@@ -56,7 +58,21 @@ function correct(){
   score++
 }
 
-function timeTick(){
+function timeTick(clock){
+
+  if (!clock.running) {
+    console.log("stopped: ", playerName)
+    console.log("stopped, need the score here: TODOTODOTODO")
+    $.ajax({
+      url: "/finish",
+      method: "POST",
+      data: { name: playerName, score: 9999999},
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  }
+
   if (timerPanel === 3){
     timerPanel = 0
     panel.remove()
