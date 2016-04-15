@@ -4,9 +4,8 @@ var cheerio = require('cheerio')
 var chooseAnswer = require('./')
 var chooseOption = require('./')
 
-var buildDropdownElement = requrie('./')
-var setAnswer = require('./')
-var insertDom = require('./')
+var buildDropdownElement = require('./')
+
 var populate = require('./')
 
 
@@ -78,9 +77,6 @@ test("Testing buildDropdownElement function", function (t) {
 
   var $ = cheerio.load(element)
 
-  var sel = $('select')
-  t.equal(sel.length, 1, 'there is x1 select in the element')
-
   var opts = $('option')
   t.equal(opts.length, 4, 'there are x4 options in the select in the element')
 
@@ -92,7 +88,7 @@ test("Testing buildDropdownElement function", function (t) {
 })
 
 
-test("Testing buildDropdownElement function", function (t) {
+test("Testing insertDom function", function (t) {
   var element = buildDropdownElement(testOptions, testAns)
   var ok = insertDom(element)
   t.ok(ok, 'not sure how to test inserting in to the dom. probs nightwatch :)')
