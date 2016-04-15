@@ -14,11 +14,10 @@ function remove(){
 }
 
 function reset(){
+  $('.panel').css('visibility','')
+  console.log('resetting panel')
+  removeOrder = getRandomPanelOrder()
   currentPanel = 0
-  for(var i = 0; i < 8; i++){
-    $('#panel-'+i).css('visibility','')
-  }
-
 }
 
 module.exports = {

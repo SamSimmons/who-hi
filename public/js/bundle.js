@@ -1608,7 +1608,7 @@ module.exports = {
   answer: answer
 }
 
-},{"./dropdown":7,"./panel":10,"./timer":13}],9:[function(require,module,exports){
+},{"./dropdown":7,"./panel":10,"./timer":14}],9:[function(require,module,exports){
 var game = require('./game.js')
 var server = require('./server.js')
 var render = require('./render.js')
@@ -1669,6 +1669,9 @@ document.querySelector('.start').addEventListener('click', function (e) {
         //post the score to the server
 
 },{"./game.js":8,"./render.js":11,"./server.js":12}],10:[function(require,module,exports){
+var shuffleArray = require('./shuffleArray.js')
+
+var removeOrder = getRandomPanelOrder()
 var currentPanel = 0
 
 function render(imageUrl){
@@ -1677,16 +1680,15 @@ function render(imageUrl){
 }
 
 function remove(){
-  $('#panel-'+currentPanel).css('visibility','hidden')
+  $('#panel-'+removeOrder[currentPanel]).css('visibility','hidden')
   currentPanel++
 }
 
 function reset(){
+  $('.panel').css('visibility','')
+  console.log('resetting panel')
+  removeOrder = getRandomPanelOrder()
   currentPanel = 0
-  for(var i = 0; i < 8; i++){
-    $('#panel-'+i).css('visibility','')
-  }
-
 }
 
 module.exports = {
@@ -1695,7 +1697,15 @@ module.exports = {
   reset: reset
 }
 
-},{}],11:[function(require,module,exports){
+function getRandomPanelOrder() {
+  var numPanels = document.querySelectorAll('.panel').length
+  var array = []
+  for(var i = 0; i < numPanels; i++)
+    array.push(i)
+  return shuffleArray(array)
+}
+
+},{"./shuffleArray.js":13}],11:[function(require,module,exports){
 module.exports = {
 	renderLanding: function () {
 		var overlay = document.createElement('div')
@@ -1797,6 +1807,25 @@ module.exports = {
 }
 
 },{"superagent":1}],13:[function(require,module,exports){
+module.exports = array => {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+},{}],14:[function(require,module,exports){
 var clock = $('.timer').FlipClock(30, {
   autoStart: false,
   countdown: true,
