@@ -1,4 +1,4 @@
-var clock = $('.timer').FlipClock(5, {
+var clock = $('.timer').FlipClock(120, {
   autoStart: false,
   countdown: true,
   clockFace: 'MinuteCounter'
