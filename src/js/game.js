@@ -23,7 +23,6 @@ function start(imageArray) {
 
   timer.start(timeTick)
   panel.render(currentAnswer.image)
-  // dropdown.populate(imageArray, 1)
 }
 
 function chooseAnswer(arr){
@@ -41,20 +40,23 @@ function chooseOptions(cohortArray, answer){
 }
 
 function answer(event){
-  var input = $('#dropBox option:selected').text()
-  if(input === currentAnswer)
+  var input = $('#dropbox').val()
+  console.log(input, currentAnswer.name)
+  if(input === currentAnswer.name)
     correct()
 }
 
 function correct(){
+  console.log(answersLeftArray.length)
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
+  dropdown.populate(otherOptions, currentAnswer)
   panel.render(currentAnswer.image)
+  panel.reset()
   score++
 }
 
 function timeTick(){
-  console.log('timer panel', timerPanel)
   if (timerPanel === 3){
     timerPanel = 0
     panel.remove()

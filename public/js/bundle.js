@@ -1496,24 +1496,18 @@ var correctAnswer = 0
 
 
 function populate(nonAnsers,answer) {
+    $('#dropbox').html('');
+    $('#dropbox').append( buildElement(nonAnsers,answer) );
+}
+
+function buildElement(nonAnsers,answer){
     var options=[];
     nonAnsers.push(answer);
     nonAnsers.forEach(function(option,i){
       var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
       options.push(_option);
     })
-    $('#dropbox').append(options);
-
-}
-
-function buildElement(answer, otherOptions){
-  // document.querySelector('#dropbox').innerHTML = ""
-  // answersArray.forEach(function(answer, i){
-  //   var option = document.createElement('option')
-  //   option.innerHTML = answer
-  //   option.value = i
-  //   document.querySelector('#dropbox').appendChild(option)
-  // })
+    return options;
 }
 
 
@@ -1562,7 +1556,6 @@ function start(imageArray) {
 
   timer.start(timeTick)
   panel.render(currentAnswer.image)
-  // dropdown.populate(imageArray, 1)
 }
 
 function chooseAnswer(arr){
@@ -1580,20 +1573,23 @@ function chooseOptions(cohortArray, answer){
 }
 
 function answer(event){
-  var input = $('#dropBox option:selected').text()
-  if(input === currentAnswer)
+  var input = $('#dropbox').val()
+  console.log(input, currentAnswer.name)
+  if(input === currentAnswer.name)
     correct()
 }
 
 function correct(){
+  console.log(answersLeftArray.length)
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
+  dropdown.populate(otherOptions, currentAnswer)
   panel.render(currentAnswer.image)
+  panel.reset()
   score++
 }
 
 function timeTick(){
-  console.log('timer panel', timerPanel)
   if (timerPanel === 3){
     timerPanel = 0
     panel.remove()
@@ -1623,6 +1619,11 @@ var imageArray = [{ id: 1, name: 'harry', image: 'http://i.imgur.com/sVLVL5z.jpg
 
 var newArray = server.getCohort(function(err, res){
   game.start(res)
+})
+
+document.querySelector('#submit-btn').addEventListener('click', function(e){
+  console.log('submit')
+  game.answer(e)
 })
 
 document.querySelector('.start').addEventListener('click', function (e) {
@@ -1677,8 +1678,11 @@ function remove(){
 }
 
 function reset(){
-  console.log('resetting panel')
   currentPanel = 0
+  for(var i = 0; i < 8; i++){
+    $('#panel-'+i).css('visibility','')
+  }
+
 }
 
 module.exports = {
@@ -1744,7 +1748,7 @@ module.exports = {
 var request = require('superagent')
 
 function getCohort(callback){
-  request.get('http://localhost:3000/start')
+  request.get('/start')
     .set('Accept', 'application/json')
     .end(function(err, res){
       // Calling the end function will send the request
@@ -1757,7 +1761,7 @@ function getCohort(callback){
 }
 
 function getScores(callback){
-  request.get('http://localhost:3000/scores')
+  request.get('/scores')
     .set('Accept', 'application/json')
     .end(function(err, res){
       // Calling the end function will send the request
@@ -1770,7 +1774,7 @@ function getScores(callback){
 }
 
 function getScores(scoreObject, callback){
-  request.post('http://localhost:3000/finish')
+  request.post('/finish')
     .send(scoreObject)
     .set('Accept', 'application/json')
     .end(function(err, res){

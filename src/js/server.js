@@ -1,7 +1,7 @@
 var request = require('superagent')
 
 function getCohort(callback){
-  request.get('http://localhost:3000/start')
+  request.get('/start')
     .set('Accept', 'application/json')
     .end(function(err, res){
       // Calling the end function will send the request
@@ -14,7 +14,7 @@ function getCohort(callback){
 }
 
 function getScores(callback){
-  request.get('http://localhost:3000/scores')
+  request.get('/scores')
     .set('Accept', 'application/json')
     .end(function(err, res){
       // Calling the end function will send the request
@@ -27,7 +27,7 @@ function getScores(callback){
 }
 
 function getScores(scoreObject, callback){
-  request.post('http://localhost:3000/finish')
+  request.post('/finish')
     .send(scoreObject)
     .set('Accept', 'application/json')
     .end(function(err, res){
