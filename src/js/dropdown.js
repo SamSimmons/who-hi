@@ -1,3 +1,4 @@
+var shuffleArray = require('./shuffleArray.js')
 var answers = []
 var correctAnswer = 0
 
@@ -18,6 +19,7 @@ function populate(nonAnsers,answer) {
 function buildElement(nonAnsers,answer){
     var options=[];
     nonAnsers.push(answer);
+    nonAnsers = shuffleArray(nonAnsers)
     nonAnsers.forEach(function(option,i){
       var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
       options.push(_option);
