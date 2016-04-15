@@ -12,17 +12,11 @@ function start(imageArray, name) {
   playerName = name
   cohortArray = imageArray
   answersLeftArray = cohortArray.map(function(element){ return element })
-
-  //start the timer
-  //render/reset the panel
-  //populate the drop down box
-  //set the score to 0
-
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
 
   dropdown.populate(otherOptions, currentAnswer)
-
+  $('.user-score').text(score)
   timer.start(timeTick)
   panel.render(currentAnswer.image)
 }
@@ -38,7 +32,6 @@ function chooseOptions(cohortArray, answer){
     return element.name !== answer.name
   })
   return arrayWithoutAnswer.splice(0,3)
-
 }
 
 function answer(event){
@@ -46,18 +39,30 @@ function answer(event){
   console.log(input, currentAnswer.name)
   if(input === currentAnswer.name)
     correct()
+  else {
+    incorrect()
+  }
+}
+
+function incorrect(){
+  currentAnswer = chooseAnswer(answersLeftArray)
+  var otherOptions = chooseOptions(cohortArray, currentAnswer)
+  dropdown.populate(otherOptions, currentAnswer)
+  panel.render(currentAnswer.image)
+  panel.reset()
 }
 
 function correct(){
-  console.log(answersLeftArray.length)
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
   dropdown.populate(otherOptions, currentAnswer)
   panel.render(currentAnswer.image)
   panel.reset()
   score++
+  $('.user-score').text(score)
 }
 
+<<<<<<< HEAD
 function timeTick(clock){
 
   if (!clock.running) {
@@ -74,6 +79,10 @@ function timeTick(clock){
   }
 
   if (timerPanel === 3){
+=======
+function timeTick(){
+  if (timerPanel === 2){
+>>>>>>> 354905c24546e8761fcb75aa5bb63fe88e956e4c
     timerPanel = 0
     panel.remove()
   } else {
