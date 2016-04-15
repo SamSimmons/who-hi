@@ -15,7 +15,7 @@ function remove(){
 
 function reset(){
   console.log('resetting panel')
-  var removeOrder = getRandomPanelOrder()
+  removeOrder = getRandomPanelOrder()
   currentPanel = 0
 }
 
