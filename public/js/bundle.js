@@ -1842,7 +1842,7 @@ module.exports = array => {
   return array;
 }
 },{}],14:[function(require,module,exports){
-var clock = $('.timer').FlipClock(30, {
+var clock = $('.timer').FlipClock(120, {
   autoStart: false,
   countdown: true,
   clockFace: 'MinuteCounter'
