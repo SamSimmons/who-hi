@@ -10,7 +10,7 @@ module.exports = {
 		var usernameInput = document.createElement('input')
 		usernameInput.className = "username-input"
 		usernameInput.type = "text"
-		usernameInput.placeholder = "username" 
+		usernameInput.placeholder = "username"
 
 
 		var startButton = document.createElement('button')
@@ -21,7 +21,7 @@ module.exports = {
 		overlay.appendChild(usernameInput)
 		overlay.appendChild(startButton)
 
-		document.body.appendChild(overlay)	
+		document.body.appendChild(overlay)
 	},
 	renderScores: function () {
 		$.get('/scores', function (data) {
@@ -51,7 +51,10 @@ module.exports = {
 	renderUserScore: function (name, score) {
 		var userScore = document.createElement('div')
 		userScore.className = 'last-score'
-		userScore.innerHTML = name + " " + score
+		var message = document.createElement('p')
+		message.innerHTML = "Well done " + name + "! Your score is: " + score
+		userScore.appendChild(message)
+
 
 		document.querySelector('.overlay').appendChild(userScore)
 	}
