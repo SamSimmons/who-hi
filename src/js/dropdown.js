@@ -23,7 +23,9 @@ function buildElement(nonAnsers,answer){
     nonAnsers.forEach(function(option,i){
       var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
       options.push(_option);
+      options = shuffleArray(options)
     })
+    options = shuffleArray(options)
     return options;
 }
 
