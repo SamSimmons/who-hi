@@ -2,6 +2,12 @@ extends layout
 
 block content
   #main.main
+    .gameContainer
+      .leaderboard
+      .panel-container
+        -for(var i = 0; i < 9; i++){
+          div(id='panel-'+i class='panel')
+        -}
     .ui
       .score-container
         h2 Score:
@@ -10,12 +16,6 @@ block content
       .inputContainer
       select#dropbox
       button#submit-btn Submit Answer
-    .gameContainer
-      .leaderboard
-      .panel-container
-        -for(var i = 0; i < 9; i++){
-          div(id='panel-'+i class='panel')
-        -}
   script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js")
   script(type="text/javascript" src="js/flipclock.min.js")
   script(type="text/javascript" src="js/bundle.js")

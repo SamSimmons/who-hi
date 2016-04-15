@@ -26,11 +26,51 @@ h1 {
 	padding: 1vh 0;
 }
 
+h2 {
+	font-family: $titleFont;
+	font-size: 3em;
+	color: $contrast;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.ui {
+	display: inline-flex;
+	flex-direction: column;
+	margin-right: auto;
+
+	.user-score {
+		font-family: $titleFont;
+		font-size: 3em;
+		color: $contrast;
+		font-weight: bold;
+		min-height: 10vh;
+		min-width: 10vh;
+		border: 2px solid $contrast;
+		margin-bottom: 10px;
+		text-align: center;
+		vertical-align: middle;
+		border-radius: $round;
+		padding-top: 10px;
+
+	}
+
+	.timer {
+		margin-top: 5vh;
+	}
+}
+
+img {
+	margin-top: 10vh;
+}
+
 .main {
   width: 100vw;
   height: 100vh;
   background-color: $main;
   color: $contrast;
+  display: flex;
+  padding: 10vw;
 }
 
 .gameContainer {
