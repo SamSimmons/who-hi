@@ -64,6 +64,17 @@ img {
 	margin-top: 10vh;
 }
 
+.last-score {
+	margin-top: 5vh;
+	color: $contrast;
+	border: 2px solid $contrast;
+	background-color: $main;
+	padding: 2vh;
+	box-shadow: none;
+	border-radius: $round;
+	font-size: 1.5em;
+}
+
 .main {
   width: 100vw;
   height: 100vh;
