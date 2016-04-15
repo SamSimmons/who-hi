@@ -1,7 +1,6 @@
 var timer = require('./timer')
 var panel = require('./panel')
 var dropdown = require('./dropdown')
-var shuffleArray = require('./shuffleArray.js')
 var timerPanel = 0
 var score = 0
 var cohortArray = []
@@ -12,7 +11,6 @@ var playerName
 function start(imageArray, name) {
   playerName = name
   cohortArray = imageArray
-  cohortArray = shuffleArray(cohortArray)
   answersLeftArray = cohortArray.map(function(element){ return element })
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
@@ -46,15 +44,6 @@ function answer(event){
   }
 }
 
-function ended(){
-  score = 0
-  panel.reset()
-}
-
-function getScore() {
-  return score
-}
-
 function incorrect(){
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
@@ -73,7 +62,9 @@ function correct(){
   $('.user-score').text(score)
 }
 
+
 function timeTick(clock){
+
   if (!clock.running) {
     $.ajax({
       url: "/finish",
@@ -90,8 +81,8 @@ function timeTick(clock){
   }
 }
 
+
 module.exports = {
   start: start,
-  answer: answer,
-  getScore: getScore
+  answer: answer
 }

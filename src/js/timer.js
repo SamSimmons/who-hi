@@ -1,18 +1,19 @@
-var clock = $('.timer').FlipClock(30, {
+var clock = $('.timer').FlipClock(120, {
   autoStart: false,
   countdown: true,
   clockFace: 'MinuteCounter'
 });
 
 function start(callback) {
-  clock.start(function(){
-    callback(clock.getTime.time)
+  clock.start( function(){
+    callback(clock)
   })
 }
 
-function getTime(){
+function getTime() {
   return clock.getTime.time
 }
+
 
 module.exports = {
   start: start,
