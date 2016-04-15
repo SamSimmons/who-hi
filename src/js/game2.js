@@ -44,15 +44,6 @@ function answer(event){
   }
 }
 
-function ended(){
-  score = 0
-  panel.reset()
-}
-
-function getScore() {
-  return score
-}
-
 function incorrect(){
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
@@ -71,7 +62,9 @@ function correct(){
   $('.user-score').text(score)
 }
 
+
 function timeTick(clock){
+
   if (!clock.running) {
     $.ajax({
       url: "/finish",
@@ -88,8 +81,8 @@ function timeTick(clock){
   }
 }
 
+
 module.exports = {
   start: start,
-  answer: answer,
-  getScore: getScore
+  answer: answer
 }
