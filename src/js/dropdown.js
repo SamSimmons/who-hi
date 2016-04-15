@@ -11,12 +11,18 @@ var correctAnswer = 0
 
 
 function populate(nonAnsers,answer) {
+    $('#dropbox').html('');
+    $('#dropbox').append(buildElement(nonAnsers,answer));
+}
+
+function buildElement(answer, otherOptions){
     var options=[];
     nonAnsers.push(answer);
     nonAnsers.forEach(function(option,i){
       var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
       options.push(_option);
     })
+<<<<<<< HEAD
     $('#dropbox').append(options);
 
 }
@@ -29,24 +35,17 @@ function buildElement(answer, otherOptions){
   //   option.value = i
   //   document.querySelector('#dropbox').appendChild(option)
   // })
+=======
+    return options.join(' ');
+>>>>>>> 6eeea163506fa681c3d86eb0d99b5ca97a325344
 }
 
 
 
-function setAnswer(indexOfAnswer) {
-  correctAnswer = correct
-}
-
-
-//gets the currently selected dropdown item selected and reutrns a boolean if the guess is correct
-function insertDom(element){
-
-}
 
 //build array for dropbox (takes in an answer and five times random)
 
 module.exports = {
   populate: populate,
-  setAnswer: setAnswer,
-  insertDom: insertDom
+  buildElement: buildElement
 }

@@ -14,6 +14,10 @@ var newArray = server.getCohort(function(err, res){
   game.start(res)
 })
 
+document.querySelector('#submit-btn').addEventListener('click', function(e){
+  game.answer(e)
+})
+
 document.querySelector('.start').addEventListener('click', function (e) {
   document.querySelector('.overlay').style.display = 'none'
 })
