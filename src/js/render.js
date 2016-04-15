@@ -47,5 +47,13 @@ module.exports = {
 
 			document.querySelector('.overlay').appendChild(hiScoreContainer)
 		})
+	},
+	renderUserScore: function (name, score) {
+		var userScore = document.createElement('div')
+		userScore.className = 'last-score'
+		userScore.innerHTML = name + " " + score
+
+		document.querySelector('.overlay').appendChild(userScore)
 	}
+
 }
