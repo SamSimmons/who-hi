@@ -8,6 +8,7 @@ var cohortArray = []
 var answersLeftArray = []
 var currentAnswer;
 var playerName
+var render = require('./render')
 
 function start(imageArray, name) {
   playerName = name
@@ -47,8 +48,16 @@ function answer(event){
 }
 
 function ended(){
-  score = 0
+  console.log('ended')
+  console.log('score is', score)
+  document.querySelector('.overlay').remove()
   panel.reset()
+  render.renderLanding()
+  render.renderUserScore(playerName, score)
+  answersLeftArray = cohortArray.map(function(element){ return element })
+  render.renderScores()
+  score = 0
+  //reset array
 }
 
 function getScore() {
@@ -75,6 +84,7 @@ function correct(){
 
 function timeTick(clock){
   if (!clock.running) {
+    ended()
     $.ajax({
       url: "/finish",
       method: "POST",

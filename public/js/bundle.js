@@ -1545,6 +1545,7 @@ var cohortArray = []
 var answersLeftArray = []
 var currentAnswer;
 var playerName
+var render = require('./render')
 
 function start(imageArray, name) {
   playerName = name
@@ -1584,8 +1585,16 @@ function answer(event){
 }
 
 function ended(){
-  score = 0
+  console.log('ended')
+  console.log('score is', score)
+  document.querySelector('.overlay').remove()
   panel.reset()
+  render.renderLanding()
+  render.renderUserScore(playerName, score)
+  answersLeftArray = cohortArray.map(function(element){ return element })
+  render.renderScores()
+  score = 0
+  //reset array
 }
 
 function getScore() {
@@ -1612,6 +1621,7 @@ function correct(){
 
 function timeTick(clock){
   if (!clock.running) {
+    ended()
     $.ajax({
       url: "/finish",
       method: "POST",
@@ -1633,7 +1643,7 @@ module.exports = {
   getScore: getScore
 }
 
-},{"./dropdown":7,"./panel":10,"./shuffleArray.js":13,"./timer":14}],9:[function(require,module,exports){
+},{"./dropdown":7,"./panel":10,"./render":11,"./shuffleArray.js":13,"./timer":14}],9:[function(require,module,exports){
 var game = require('./game.js')
 var server = require('./server.js')
 var render = require('./render.js')
@@ -1713,7 +1723,7 @@ module.exports = {
 		var usernameInput = document.createElement('input')
 		usernameInput.className = "username-input"
 		usernameInput.type = "text"
-		usernameInput.placeholder = "username" 
+		usernameInput.placeholder = "username"
 
 
 		var startButton = document.createElement('button')
@@ -1724,7 +1734,7 @@ module.exports = {
 		overlay.appendChild(usernameInput)
 		overlay.appendChild(startButton)
 
-		document.body.appendChild(overlay)	
+		document.body.appendChild(overlay)
 	},
 	renderScores: function () {
 		$.get('/scores', function (data) {
@@ -1754,7 +1764,10 @@ module.exports = {
 	renderUserScore: function (name, score) {
 		var userScore = document.createElement('div')
 		userScore.className = 'last-score'
-		userScore.innerHTML = name + " " + score
+		var message = document.createElement('p')
+		message.innerHTML = "Well done " + name + "! Your score is: " + score
+		userScore.appendChild(message)
+
 
 		document.querySelector('.overlay').appendChild(userScore)
 	}
