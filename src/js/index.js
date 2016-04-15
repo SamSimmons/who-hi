@@ -14,7 +14,14 @@ var newArray = server.getCohort(function(err, res){
   game.start(res)
 })
 
+document.querySelector('#submit-btn').addEventListener('click', function(e){
+  console.log('submit')
+  game.answer(e)
+})
 
+document.querySelector('.start').addEventListener('click', function (e) {
+  document.querySelector('.overlay').style.display = 'none'
+})
 
 // imageArray.map(function(imageObject){
 //   var imageDiv = document.createElement('div')

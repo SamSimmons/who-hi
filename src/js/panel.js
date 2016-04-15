@@ -14,6 +14,7 @@ function remove(){
 }
 
 function reset(){
+  $('.panel').css('visibility','')
   console.log('resetting panel')
   removeOrder = getRandomPanelOrder()
   currentPanel = 0

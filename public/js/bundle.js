@@ -1494,26 +1494,20 @@ var correctAnswer = 0
 
 
 
-function populate(answer, otherOptions){
 
-  //builds the dropdown element
-
-  var element = buildElement(answer, otherOptions)
-  var answer = setAnswer(indexOfAnswer)
-
-
-
-
+function populate(nonAnsers,answer) {
+    $('#dropbox').html('');
+    $('#dropbox').append( buildElement(nonAnsers,answer) );
 }
 
-function buildElement(answer, otherOptions){
-  // document.querySelector('#dropbox').innerHTML = ""
-  // answersArray.forEach(function(answer, i){
-  //   var option = document.createElement('option')
-  //   option.innerHTML = answer
-  //   option.value = i
-  //   document.querySelector('#dropbox').appendChild(option)
-  // })
+function buildElement(nonAnsers,answer){
+    var options=[];
+    nonAnsers.push(answer);
+    nonAnsers.forEach(function(option,i){
+      var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
+      options.push(_option);
+    })
+    return options;
 }
 
 
@@ -1544,69 +1538,63 @@ var timerPanel = 0
 var score = 0
 var cohortArray = []
 var answersLeftArray = []
-
-//this module controls game logic
-//starts the game using a timer
-//
-//check
-
-//user press start
-  //show the first image and div with the timer and the start button
-  //user press start
-    //start the timer and countdown
-    //while the coountdown is not zero
-      //after a number of seconds reveal a panel
-      //if answer is guessed
-        //add one to the score
-        //remove the current image and replace it with the number
-        //reset the panel and reload the suggested answers
-    //when the countdown is zero
-      //hide the main panel
-      //show the finish and score
-      //post the score to the server
+var currentAnswer;
 
 function start(imageArray) {
   cohortArray = imageArray
   answersLeftArray = cohortArray.map(function(element){ return element })
+  currentAnswer = chooseAnswer(answersLeftArray)
+  var otherOptions = chooseOptions(cohortArray, currentAnswer)
 
-  //start the timer
-  //render/reset the panel
-  //populate the drop down box
-  //set the score to 0
-
-  var currentAnswer = chooseAnswer(answersLeftArray)
-
+  dropdown.populate(otherOptions, currentAnswer)
+  $('.user-score').text(score)
   timer.start(timeTick)
-  panel.render(imageArray[1].image)
-  // dropdown.populate(imageArray, 1)
+  panel.render(currentAnswer.image)
 }
 
-function chooseAnswer(allCohort){
-  var answer = answersLeftArray[0]
-  answersLeftArray.shift()
+function chooseAnswer(arr){
+  var answer = arr[0]
+  arr.shift()
   return answer
 }
 
 function chooseOptions(cohortArray, answer){
-  //returns an array that doesn't include answer
+  var arrayWithoutAnswer = cohortArray.filter(function(element){
+    return element.name !== answer.name
+  })
+  return arrayWithoutAnswer.splice(0,3)
 }
 
 function answer(event){
-  //check if answer is right or wrong
-  //get the text from the dropbox
+  var input = $('#dropbox').val()
+  console.log(input, currentAnswer.name)
+  if(input === currentAnswer.name)
+    correct()
+  else {
+    incorrect()
+  }
+}
 
-  // if (dropdown.isCorrect(event)){
-  //   score++
-  //   panel.render(imageArray[2].image)
-  //
-  //
-  // }
+function incorrect(){
+  currentAnswer = chooseAnswer(answersLeftArray)
+  var otherOptions = chooseOptions(cohortArray, currentAnswer)
+  dropdown.populate(otherOptions, currentAnswer)
+  panel.render(currentAnswer.image)
+  panel.reset()
+}
 
+function correct(){
+  currentAnswer = chooseAnswer(answersLeftArray)
+  var otherOptions = chooseOptions(cohortArray, currentAnswer)
+  dropdown.populate(otherOptions, currentAnswer)
+  panel.render(currentAnswer.image)
+  panel.reset()
+  score++
+  $('.user-score').text(score)
 }
 
 function timeTick(){
-  console.log('timer panel', timerPanel)
-  if (timerPanel === 3){
+  if (timerPanel === 2){
     timerPanel = 0
     panel.remove()
   } else {
@@ -1620,7 +1608,7 @@ module.exports = {
   answer: answer
 }
 
-},{"./dropdown":7,"./panel":10,"./timer":13}],9:[function(require,module,exports){
+},{"./dropdown":7,"./panel":10,"./timer":14}],9:[function(require,module,exports){
 var game = require('./game.js')
 var server = require('./server.js')
 var render = require('./render.js')
@@ -1637,7 +1625,14 @@ var newArray = server.getCohort(function(err, res){
   game.start(res)
 })
 
+document.querySelector('#submit-btn').addEventListener('click', function(e){
+  console.log('submit')
+  game.answer(e)
+})
 
+document.querySelector('.start').addEventListener('click', function (e) {
+  document.querySelector('.overlay').style.display = 'none'
+})
 
 // imageArray.map(function(imageObject){
 //   var imageDiv = document.createElement('div')
@@ -1674,6 +1669,9 @@ var newArray = server.getCohort(function(err, res){
         //post the score to the server
 
 },{"./game.js":8,"./render.js":11,"./server.js":12}],10:[function(require,module,exports){
+var shuffleArray = require('./shuffleArray.js')
+
+var removeOrder = getRandomPanelOrder()
 var currentPanel = 0
 
 function render(imageUrl){
@@ -1682,12 +1680,14 @@ function render(imageUrl){
 }
 
 function remove(){
-  $('#panel-'+currentPanel).css('visibility','hidden')
+  $('#panel-'+removeOrder[currentPanel]).css('visibility','hidden')
   currentPanel++
 }
 
 function reset(){
+  $('.panel').css('visibility','')
   console.log('resetting panel')
+  removeOrder = getRandomPanelOrder()
   currentPanel = 0
 }
 
@@ -1697,11 +1697,23 @@ module.exports = {
   reset: reset
 }
 
-},{}],11:[function(require,module,exports){
+function getRandomPanelOrder() {
+  var numPanels = document.querySelectorAll('.panel').length
+  var array = []
+  for(var i = 0; i < numPanels; i++)
+    array.push(i)
+  return shuffleArray(array)
+}
+
+},{"./shuffleArray.js":13}],11:[function(require,module,exports){
 module.exports = {
 	renderLanding: function () {
 		var overlay = document.createElement('div')
 		overlay.className = 'overlay'
+
+		var title = document.createElement('h1')
+		title.innerHTML = "WHO-HI?"
+
 
 		var usernameInput = document.createElement('input')
 		usernameInput.className = "username-input"
@@ -1713,6 +1725,7 @@ module.exports = {
 		startButton.innerHTML = "START"
 		startButton.className = "start btn"
 
+		overlay.appendChild(title)
 		overlay.appendChild(usernameInput)
 		overlay.appendChild(startButton)
 
@@ -1749,7 +1762,7 @@ module.exports = {
 var request = require('superagent')
 
 function getCohort(callback){
-  request.get('http://localhost:3000/start')
+  request.get('/start')
     .set('Accept', 'application/json')
     .end(function(err, res){
       // Calling the end function will send the request
@@ -1762,7 +1775,7 @@ function getCohort(callback){
 }
 
 function getScores(callback){
-  request.get('http://localhost:3000/scores')
+  request.get('/scores')
     .set('Accept', 'application/json')
     .end(function(err, res){
       // Calling the end function will send the request
@@ -1775,7 +1788,7 @@ function getScores(callback){
 }
 
 function getScores(scoreObject, callback){
-  request.post('http://localhost:3000/finish')
+  request.post('/finish')
     .send(scoreObject)
     .set('Accept', 'application/json')
     .end(function(err, res){
@@ -1794,6 +1807,25 @@ module.exports = {
 }
 
 },{"superagent":1}],13:[function(require,module,exports){
+module.exports = array => {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+},{}],14:[function(require,module,exports){
 var clock = $('.timer').FlipClock(30, {
   autoStart: false,
   countdown: true,

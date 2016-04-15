@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "dev": "nodemon",
     "testunit": "node test/unit_test_*.js | tap-spec",
     "testint": "node test/inter*.js | tap-spec",
@@ -25,9 +25,16 @@
     "supertest": "^1.2.0"
   },
   "devDependencies": {
+    "cheerio": "^0.20.0",
+    "jade": "^1.11.0",
+    "jade-html-loader": "0.0.3",
+    "jade-loader": "^0.8.0",
+    "node-sass": "^3.4.2",
     "nodemon": "^1.9.1",
     "redtape": "^1.0.0",
+    "sass-loader": "^3.2.0",
     "serve-favicon": "~2.3.0",
-    "watchify": "^3.7.0"
+    "watchify": "^3.7.0",
+    "webpack": "^1.12.15"
   }
 }
