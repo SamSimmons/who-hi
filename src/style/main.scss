@@ -48,11 +48,20 @@ h2 {
 		min-width: 10vh;
 		border: 2px solid $contrast;
 		margin-bottom: 10px;
+		text-align: center;
+		vertical-align: middle;
+		border-radius: $round;
+		padding-top: 10px;
+
 	}
 
 	.timer {
 		margin-top: 5vh;
 	}
+}
+
+img {
+	margin-top: 10vh;
 }
 
 .main {

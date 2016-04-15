@@ -1711,8 +1711,8 @@ module.exports = {
 		var overlay = document.createElement('div')
 		overlay.className = 'overlay'
 
-		var title = document.createElement('h1')
-		title.innerHTML = "WHO-HI?"
+		var title = document.createElement('img')
+		title.src = "img/who-hi.png"
 
 
 		var usernameInput = document.createElement('input')
