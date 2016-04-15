@@ -1,3 +1,4 @@
+var $ = require('jquery')
 var answers = []
 var correctAnswer = 0
 
@@ -9,16 +10,14 @@ var correctAnswer = 0
 
 
 
-function populate(answer, otherOptions){
-
-  //builds the dropdown element
-
-  var element = buildElement(answer, otherOptions)
-  var answer = setAnswer(indexOfAnswer)
-
-
-
-
+function populate(nonAnsers,answer) {
+    var options=[];
+    nonAnsers.push(answer);
+    nonAnsers.forEach(function(option,i){
+      var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
+      options.push(_option);
+    })
+    $('#dropbox').append(options);
 }
 
 function buildElement(answer, otherOptions){
