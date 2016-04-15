@@ -10,11 +10,11 @@ var correctAnswer = 0
 
 
 function populate(answer, otherOptions){
-
+  console.log('populate', answer, otherOptions)
   //builds the dropdown element
 
-  var element = buildElement(answer, otherOptions)
-  var answer = setAnswer(indexOfAnswer)
+  //var element = buildElement(answer, otherOptions)
+  //var answer = setAnswer(indexOfAnswer)
 
 
 
