@@ -15,6 +15,7 @@ var newArray = server.getCohort(function(err, res){
 })
 
 document.querySelector('#submit-btn').addEventListener('click', function(e){
+  console.log('submit')
   game.answer(e)
 })
 

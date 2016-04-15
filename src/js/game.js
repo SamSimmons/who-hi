@@ -41,6 +41,7 @@ function chooseOptions(cohortArray, answer){
 
 function answer(event){
   var input = $('#dropbox').val()
+  console.log(input, currentAnswer.name)
   if(input === currentAnswer.name)
     correct()
 }

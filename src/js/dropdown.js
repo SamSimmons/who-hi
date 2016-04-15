@@ -11,24 +11,18 @@ var correctAnswer = 0
 
 
 function populate(nonAnsers,answer) {
+    $('#dropbox').html('');
+    $('#dropbox').append( buildElement(nonAnsers,answer) );
+}
+
+function buildElement(nonAnsers,answer){
     var options=[];
     nonAnsers.push(answer);
     nonAnsers.forEach(function(option,i){
       var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
       options.push(_option);
     })
-    $('#dropbox').append(options);
-
-}
-
-function buildElement(answer, otherOptions){
-  // document.querySelector('#dropbox').innerHTML = ""
-  // answersArray.forEach(function(answer, i){
-  //   var option = document.createElement('option')
-  //   option.innerHTML = answer
-  //   option.value = i
-  //   document.querySelector('#dropbox').appendChild(option)
-  // })
+    return options;
 }
 
 
