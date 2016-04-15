@@ -2,15 +2,28 @@ $main: #48497b;
 $contrast: #fd633f;
 $light: #e0dddc;
 $dark: #545454;
+$mainFont: 'Fira sans';
+$titleFont: 'Crimson Text';
+$round: 5px;
 
 * {
 	box-sizing: border-box;
 	font-size: 100%;
+	font-family: $mainFont;
+}
+
+body {
+	background-color: $main;
 }
 
 h1 {
-	font-family: 'Crimson Text';
-	font-size: 3em;
+	font-family: $titleFont;
+	font-size: 4em;
+	color: $contrast;
+	margin-top: 2vh;
+	font-weight: bold;
+	border-bottom: 4px solid $contrast;
+	padding: 1vh 0;
 }
 
 #main {
@@ -50,7 +63,64 @@ h1 {
 
 .overlay {
 	width: 100vw;
-	height: 100vh;
-	// position: absolute;
-	background: tomato;
+	height: 200vh;
+	position: absolute;
+	background: $main;
+	top: 0;
+	left: 0;
+	z-index: 5000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.username-input {
+		margin-top: 5vh;
+		min-width: 20vw;
+		font-family: $mainFont;
+		background-color: $main + 10;
+		border: 0;
+		border-bottom: $contrast 1px solid;
+		color: $contrast;
+		box-shadow: none;
+		font-size: 2em;
+	}
+	
+	.start {
+		margin-top: 5vh;
+		color: $contrast;
+		border: 2px solid $contrast;
+		background-color: $main;
+		// width: 20vw;
+		padding: 2vh;
+		box-shadow: none;
+		border-radius: $round;
+		font-size: 1.5em;
+
+		&:hover {
+			background-color: $main + 5;
+			color: $contrast - 5;
+			box-shadow: 2px 2px 4px ($main - 10);
+		}
+	}
+
+	.high-score-container {
+		margin-top: 5vh;
+		max-width: 60vw;
+		color: $contrast;
+		border: 2px solid $contrast;
+		padding:5vh;
+		border-radius: $round;
+
+		div {
+			border-bottom: 1px solid $contrast;
+			padding-bottom: 2vh;
+			margin-top: 2vh;
+			display: flex;
+			justify-content: space-between;
+
+			.score-name {
+				margin-right: 5vw;
+			}
+		}
+	}
 }

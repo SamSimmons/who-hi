@@ -1494,15 +1494,15 @@ var correctAnswer = 0
 
 
 
-function populate(answer, otherOptions){
 
-  //builds the dropdown element
-
-  var element = buildElement(answer, otherOptions)
-  var answer = setAnswer(indexOfAnswer)
-
-
-
+function populate(nonAnsers,answer) {
+    var options=[];
+    nonAnsers.push(answer);
+    nonAnsers.forEach(function(option,i){
+      var _option= $("<option value='"+option.name+"'>"+option.name+"</option>")
+      options.push(_option);
+    })
+    $('#dropbox').append(options);
 
 }
 
@@ -1544,26 +1544,7 @@ var timerPanel = 0
 var score = 0
 var cohortArray = []
 var answersLeftArray = []
-
-//this module controls game logic
-//starts the game using a timer
-//
-//check
-
-//user press start
-  //show the first image and div with the timer and the start button
-  //user press start
-    //start the timer and countdown
-    //while the coountdown is not zero
-      //after a number of seconds reveal a panel
-      //if answer is guessed
-        //add one to the score
-        //remove the current image and replace it with the number
-        //reset the panel and reload the suggested answers
-    //when the countdown is zero
-      //hide the main panel
-      //show the finish and score
-      //post the score to the server
+var currentAnswer;
 
 function start(imageArray) {
   cohortArray = imageArray
@@ -1574,34 +1555,41 @@ function start(imageArray) {
   //populate the drop down box
   //set the score to 0
 
-  var currentAnswer = chooseAnswer(answersLeftArray)
+  currentAnswer = chooseAnswer(answersLeftArray)
+  var otherOptions = chooseOptions(cohortArray, currentAnswer)
+
+  dropdown.populate(otherOptions, currentAnswer)
 
   timer.start(timeTick)
-  panel.render(imageArray[1].image)
+  panel.render(currentAnswer.image)
   // dropdown.populate(imageArray, 1)
 }
 
-function chooseAnswer(allCohort){
-  var answer = answersLeftArray[0]
-  answersLeftArray.shift()
+function chooseAnswer(arr){
+  var answer = arr[0]
+  arr.shift()
   return answer
 }
 
 function chooseOptions(cohortArray, answer){
-  //returns an array that doesn't include answer
+  var arrayWithoutAnswer = cohortArray.filter(function(element){
+    return element.name !== answer.name
+  })
+  return arrayWithoutAnswer.splice(0,3)
+
 }
 
 function answer(event){
-  //check if answer is right or wrong
-  //get the text from the dropbox
+  var input = $('#dropBox option:selected').text()
+  if(input === currentAnswer)
+    correct()
+}
 
-  // if (dropdown.isCorrect(event)){
-  //   score++
-  //   panel.render(imageArray[2].image)
-  //
-  //
-  // }
-
+function correct(){
+  currentAnswer = chooseAnswer(answersLeftArray)
+  var otherOptions = chooseOptions(cohortArray, currentAnswer)
+  panel.render(currentAnswer.image)
+  score++
 }
 
 function timeTick(){
@@ -1637,7 +1625,9 @@ var newArray = server.getCohort(function(err, res){
   game.start(res)
 })
 
-
+document.querySelector('.start').addEventListener('click', function (e) {
+  document.querySelector('.overlay').style.display = 'none'
+})
 
 // imageArray.map(function(imageObject){
 //   var imageDiv = document.createElement('div')
@@ -1703,6 +1693,10 @@ module.exports = {
 		var overlay = document.createElement('div')
 		overlay.className = 'overlay'
 
+		var title = document.createElement('h1')
+		title.innerHTML = "WHO-HI?"
+
+
 		var usernameInput = document.createElement('input')
 		usernameInput.className = "username-input"
 		usernameInput.type = "text"
@@ -1713,6 +1707,7 @@ module.exports = {
 		startButton.innerHTML = "START"
 		startButton.className = "start btn"
 
+		overlay.appendChild(title)
 		overlay.appendChild(usernameInput)
 		overlay.appendChild(startButton)
 
