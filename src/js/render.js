@@ -3,6 +3,10 @@ module.exports = {
 		var overlay = document.createElement('div')
 		overlay.className = 'overlay'
 
+		var title = document.createElement('h1')
+		title.innerHTML = "WHO-HI?"
+
+
 		var usernameInput = document.createElement('input')
 		usernameInput.className = "username-input"
 		usernameInput.type = "text"
@@ -13,6 +17,7 @@ module.exports = {
 		startButton.innerHTML = "START"
 		startButton.className = "start btn"
 
+		overlay.appendChild(title)
 		overlay.appendChild(usernameInput)
 		overlay.appendChild(startButton)
 
