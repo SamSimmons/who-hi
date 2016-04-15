@@ -1,6 +1,7 @@
 var timer = require('./timer')
 var panel = require('./panel')
 var dropdown = require('./dropdown')
+var shuffleArray = require('./shuffleArray.js')
 var timerPanel = 0
 var score = 0
 var cohortArray = []
@@ -9,6 +10,7 @@ var currentAnswer;
 
 function start(imageArray) {
   cohortArray = imageArray
+  cohortArray = shuffleArray(cohortArray)
   answersLeftArray = cohortArray.map(function(element){ return element })
   currentAnswer = chooseAnswer(answersLeftArray)
   var otherOptions = chooseOptions(cohortArray, currentAnswer)
